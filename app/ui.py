@@ -33,3 +33,35 @@ class Ui:
                 continue
             else:
                 return int(rez)
+    
+    def interfase_loop(func, write, menu):
+        while True:
+            func()
+
+            if write:
+                # FIXME: Запись изменений в файл с параметрами
+                pass
+
+            a = input(menu)
+
+            if int(a) == 1:
+                continue
+            else:
+                break
+
+    def interfase_variable(func, func1, func2, write, menu):
+        while True:
+            func()
+
+            if write:
+                # FIXME: Запись изменений в файл с параметрами
+                pass
+
+            a = input(menu)
+
+            if int(a) == 1:
+                func1()
+            elif int(a) == 2:
+                func2()
+            else:
+                break
