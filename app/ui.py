@@ -28,11 +28,13 @@ class Ui:
             elif not rez.isdigit():
                 print(error_nodigit)
                 continue
-            elif not min < rez < max:
+            elif not min < int(rez) < max:
                 print(error_wrong)
                 continue
             else:
                 return int(rez)
+
+    # Интерфейсы (пока хз, будут ли)
     
     def interfase_loop(func, write, menu):
         while True:
@@ -49,19 +51,8 @@ class Ui:
             else:
                 break
 
-    def interfase_variable(func, func1, func2, write, menu):
-        while True:
+    def interfase_variable(text, func):
+        a = input(text)
+
+        if int(a) == 1:
             func()
-
-            if write:
-                # FIXME: Запись изменений в файл с параметрами
-                pass
-
-            a = input(menu)
-
-            if int(a) == 1:
-                func1()
-            elif int(a) == 2:
-                func2()
-            else:
-                break
