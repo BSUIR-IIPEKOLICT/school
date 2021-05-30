@@ -1,4 +1,6 @@
-from app.string import error_empty, error_nodigit, error_wrong
+import datetime
+
+from app.string import *
 
 class Ui:
     def divider():
@@ -18,7 +20,7 @@ class Ui:
             else:
                 return rez
 
-    def enterInt(text, min = 0, max = 9999):
+    def enter_int(text, min = 0, max = 9999):
         while True:
             rez = input(text)
 
@@ -33,6 +35,25 @@ class Ui:
                 continue
             else:
                 return int(rez)
+
+    def enter_date():
+        while True:
+            d = Ui.enter_int(date_day, 0, 32)
+            m = Ui.enter_int(date_month, 0, 13)
+            y = Ui.enter_int(date_year, 1900, 2100)
+
+            try:
+                datetime.date(y, m, d)
+
+                date_str = datetime.datetime(y, m, d).strftime('%d.%m.%Y')
+                return date_str
+            except:
+                print(error_nodate)
+                continue
+
+    def convert_date(date_str):
+        date = datetime.datetime.strptime(date_str, '%d.%m.%Y')
+        return date
 
     # Интерфейсы (пока хз, будут ли)
     

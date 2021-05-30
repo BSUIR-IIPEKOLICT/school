@@ -16,11 +16,11 @@ par = [
         Pupil('Риаз', 'Гремори', 'Лошица', 2)
     ],
     [
-        Mark(9, 0, 2, '21.05.2021'),
-        Mark(2, 0, 1, '12.05.2021'),
-        Mark(6, 1, 0, '10.05.2021'),
-        Mark(8, 3, 0, '14.05.2021'),
-        Mark(1, 2, 1, '18.05.2021'),
+        Mark(9, 0, 2, '21.05.2021', 0),
+        Mark(2, 0, 1, '12.05.2021', 1),
+        Mark(6, 1, 0, '10.05.2021', 2),
+        Mark(8, 3, 0, '14.05.2021', 3),
+        Mark(1, 2, 1, '18.05.2021', 4),
     ],
     [
         Subject('Математика', 0),
@@ -39,6 +39,24 @@ def changePupil():
     Ui.header(header_12)
     Pupil.pupil_table(par)
     Pupil.change_pupil(par)
+
+def createMark():
+    Ui.header(header_21)
+    Mark.create_mark(par)
+
+def markChronology():
+    Ui.header(header_22)
+    Pupil.pupil_table(par)
+    Mark.mark_chronology(1, par)
+
+def markInInterval():
+    Ui.header(header_23)
+    Pupil.pupil_table(par)
+    Mark.mark_chronology(2, par)
+
+def markedPupils():
+    Ui.header(header_24)
+    Mark.marked_pupils(par)
 
 # BLOCK: Сама прога
 
@@ -66,13 +84,13 @@ while True:
             b = input(menu_2)
 
             if int(b) == 1:
-                pass
+                Ui.interfase_loop(createMark, True, menu_21)
             elif int(b) == 2:
-                pass
+                Ui.interfase_loop(markChronology, False, menu_22)
             elif int(b) == 3:
-                pass
+                Ui.interfase_loop(markInInterval, False, menu_23)
             elif int(b) == 4:
-                pass
+                Ui.interfase_loop(markedPupils, False, menu_24)
             else:
                 break
     elif int(a) == 3:
