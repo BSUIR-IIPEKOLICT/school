@@ -16,11 +16,15 @@ class Mark:
     def create_mark(par):
         value = Ui.enter_int(mark_value, -1, 11)
 
-        Subject.subject_list(par)
-        subject_id = Ui.enter_int(mark_subject, 0, len(par[2]) + 1) - 1
+        # Subject.subject_list(par)
+        # subject_id = Ui.enter_int(mark_subject, 0, len(par[2]) + 1) - 1
 
-        Pupil.pupil_table(par)
-        pupil_id = Ui.enter_int(mark_pupil, 0, len(par[0]) + 1) - 1
+        subject_id = Subject.choose_subject(par).id
+
+        # Pupil.pupil_table(par)
+        # pupil_id = Ui.enter_int(mark_pupil, 0, len(par[0]) + 1) - 1
+
+        pupil_id = Pupil.choose_pupil(par).id
 
         date = Ui.enter_date()
         id = len(par[1])
@@ -29,61 +33,65 @@ class Mark:
         par[1].append(new)
         return new
 
-    def mark_chronology(type, par):
+    def mark_chronology(par):
         pupil = Pupil.choose_pupil(par)
 
-        if type == 1:
-            Subject.subject_list(par)
-            subject = Subject.choose_subject(par)
-        else:
-            print(date_start)
-            start = Ui.enter_date()
-            print(date_end)
-            end = Ui.enter_date()
+        # Subject.subject_list(par)
+        subject = Subject.choose_subject(par)
 
         data = dict()
 
-        if type == 1:
-            for mark in par[1]:
-                for subject in par[2]:
-                    if mark.pupil_id == pupil.id and mark.subject_id == subject.id:
-                        data[mark.date] = mark.id
-        else:
-            for mark in par[1]:
-                if mark.pupil_id == pupil.id:
-                    if Ui.convert_date(start) <= Ui.convert_date(mark.date) <= Ui.convert_date(end):
-                        data[mark.date] = mark.id
+        for mark in par[1]:
+            for subject_ in par[2]:
+                if mark.pupil_id == pupil.id and mark.subject_id == subject_.id:
+                    data[mark.date] = mark.id
         
-        sorted_data = sorted(data.items(), key = lambda x:datetime.datetime.strptime(x[0], '%d.%m.%Y'), reverse=True)
+        sorted_data = sorted(data.items(), key = lambda x:datetime.datetime.strptime(x[0], '%d.%m.%Y'), reverse = False)
         
-        if type == 1:
-            print('\nОценки учащегося {0} {1} по предмету {2} в хронологическом порядке\n'
-            .format(pupil.name, pupil.surname, subject.name))
+        print('\nОценки учащегося {0} {1} по предмету {2} в хронологическом порядке\n'
+        .format(pupil.name, pupil.surname, subject.name))
 
-            for item in sorted_data:
-                for mark in par[1]:
-                    if mark.id == int(item[1]):
-                        print('Дата: {0}, получена оценка {1}.'.format(item[0], mark.value))
-        else:
-            print('\nОценки учащегося {0} {1} в период с {2} по {3}\n'
+        for item in sorted_data:
+            for mark in par[1]:
+                if mark.id == int(item[1]):
+                    print('Дата: {0}, получена оценка {1}.'.format(item[0], mark.value))
+
+    def mark_in_interval(par):
+        pupil = Pupil.choose_pupil(par)
+
+        # print(date_start)
+        start = Ui.enter_date(date_start)
+        # print(date_end)
+        end = Ui.enter_date(date_end)
+
+        data = dict()
+
+        for mark in par[1]:
+            if mark.pupil_id == pupil.id:
+                if Ui.convert_date(start) <= Ui.convert_date(mark.date) <= Ui.convert_date(end):
+                    data[mark.date] = mark.id
+
+        sorted_data = sorted(data.items(), key = lambda x:datetime.datetime.strptime(x[0], '%d.%m.%Y'), reverse = False)
+
+        print('\nОценки учащегося {0} {1} в период с {2} по {3}\n'
             .format(pupil.name, pupil.surname, start, end))
 
-            for item in sorted_data:
-                for mark in par[1]:
-                    if mark.id == int(item[1]):
-                        for subject in par[2]:
-                            if subject.id == mark.subject_id:
-                                print('Дата: {0}, получена оценка {1} по дисциплине {2}.'
-                                .format(item[0], mark.value, subject.name))
+        for item in sorted_data:
+            for mark in par[1]:
+                if mark.id == int(item[1]):
+                    for subject in par[2]:
+                        if subject.id == mark.subject_id:
+                            print('Дата: {0}, получена оценка {1} по дисциплине {2}.'
+                            .format(item[0], mark.value, subject.name))
 
     def marked_pupils(par):
-        Subject.subject_list(par)
+        # Subject.subject_list(par)
         subject = Subject.choose_subject(par)
 
-        print(date_start)
-        start = Ui.enter_date()
-        print(date_end)
-        end = Ui.enter_date()
+        # print(date_start)
+        start = Ui.enter_date(date_start)
+        # print(date_end)
+        end = Ui.enter_date(date_end)
 
         list_marked = []
         list_nomarked = []

@@ -24,6 +24,7 @@ class Pupil:
         return new
 
     def choose_pupil(par):
+        Pupil.pupil_table(par)
         id = Ui.enter_int(pupil_id, 0, len(par[0]) + 1) - 1
 
         for pupil in par[0]:

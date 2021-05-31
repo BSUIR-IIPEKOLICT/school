@@ -36,7 +36,9 @@ class Ui:
             else:
                 return int(rez)
 
-    def enter_date():
+    def enter_date(text = ''):
+        print(text)
+        
         while True:
             d = Ui.enter_int(date_day, 0, 32)
             m = Ui.enter_int(date_month, 0, 13)
@@ -57,9 +59,9 @@ class Ui:
 
     # Интерфейсы (пока хз, будут ли)
     
-    def interfase_loop(func, write, menu):
+    def interfase_loop(instruction, write, menu):
         while True:
-            func()
+            instruction()
 
             if write:
                 # FIXME: Запись изменений в файл с параметрами
@@ -72,8 +74,8 @@ class Ui:
             else:
                 break
 
-    def interfase_variable(text, func):
+    def interfase_variable(text, instruction):
         a = input(text)
 
         if int(a) == 1:
-            func()
+            instruction()
