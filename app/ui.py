@@ -20,7 +20,7 @@ class Ui:
             else:
                 return rez
 
-    def enter_int(text, min = 0, max = 9999):
+    def enter_int(text, min = 0, max = 999):
         while True:
             rez = input(text)
 
@@ -30,7 +30,7 @@ class Ui:
             elif not rez.isdigit():
                 print(error_nodigit)
                 continue
-            elif not min < int(rez) < max:
+            elif not min <= int(rez) <= max:
                 print(error_wrong)
                 continue
             else:
@@ -40,8 +40,8 @@ class Ui:
         print(text)
         
         while True:
-            d = Ui.enter_int(date_day, 0, 32)
-            m = Ui.enter_int(date_month, 0, 13)
+            d = Ui.enter_int(date_day, 1, 31)
+            m = Ui.enter_int(date_month, 1, 12)
             y = Ui.enter_int(date_year, 1900, 2100)
 
             try:
@@ -56,8 +56,6 @@ class Ui:
     def convert_date(date_str):
         date = datetime.datetime.strptime(date_str, '%d.%m.%Y')
         return date
-
-    # Интерфейсы (пока хз, будут ли)
     
     def interfase_loop(instruction, write, menu):
         while True:
@@ -73,9 +71,3 @@ class Ui:
                 continue
             else:
                 break
-
-    def interfase_variable(text, instruction):
-        a = input(text)
-
-        if int(a) == 1:
-            instruction()

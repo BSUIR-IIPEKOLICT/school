@@ -25,7 +25,7 @@ class Pupil:
 
     def choose_pupil(par):
         Pupil.pupil_table(par)
-        id = Ui.enter_int(pupil_id, 0, len(par[0]) + 1) - 1
+        id = Ui.enter_int(pupil_id, 1, len(par[0])) - 1
 
         for pupil in par[0]:
             if pupil.id == id:

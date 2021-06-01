@@ -1,5 +1,6 @@
 # MODULE: Основной каркас программы
 
+from app.average import Average
 from app.ui import Ui
 from app.pupil import Pupil
 from app.mark import Mark
@@ -37,7 +38,6 @@ def createPupil():
 
 def changePupil():
     Ui.header(header_12)
-    # Pupil.pupil_table(par)
     Pupil.change_pupil(par)
 
 def createMark():
@@ -46,12 +46,10 @@ def createMark():
 
 def markChronology():
     Ui.header(header_22)
-    # Pupil.pupil_table(par)
     Mark.mark_chronology(par)
 
 def markInInterval():
     Ui.header(header_23)
-    # Pupil.pupil_table(par)
     Mark.mark_in_interval(par)
 
 def markedPupils():
@@ -65,6 +63,14 @@ def createSubject():
 def changeSubject():
     Ui.header(header_32)
     Subject.change_subject(par)
+
+def averageMarkSubject():
+    Ui.header(header_41)
+    Average.average_mark_subject(par)
+
+def averageMarkLarger():
+    Ui.header(header_42)
+    Average.average_mark_larger(par)
 
 # BLOCK: Сама прога
 
@@ -115,6 +121,17 @@ while True:
             else:
                 break
     elif int(a) == 4:
-        pass
+        while True:
+            Ui.header(header_4)
+            Average.average_total(par)
+
+            b = input(menu_4)
+
+            if int(b) == 1:
+                Ui.interfase_loop(averageMarkSubject, False, menu_41)
+            elif int(b) == 2:
+                Ui.interfase_loop(averageMarkLarger, False, menu_42)
+            else:
+                break
     else:
         break

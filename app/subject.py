@@ -13,7 +13,7 @@ class Subject:
 
     def choose_subject(par):
         Subject.subject_list(par)
-        id = Ui.enter_int(subject_id, 0, len(par[2]) + 1) - 1
+        id = Ui.enter_int(subject_id, 1, len(par[2])) - 1
 
         for subject in par[2]:
             if subject.id == id:
