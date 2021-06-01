@@ -1,5 +1,7 @@
 import datetime
 
+from app.file import File
+
 from app.string import *
 
 class Ui:
@@ -46,7 +48,6 @@ class Ui:
 
             try:
                 datetime.date(y, m, d)
-
                 date_str = datetime.datetime(y, m, d).strftime('%d.%m.%Y')
                 return date_str
             except:
@@ -57,13 +58,9 @@ class Ui:
         date = datetime.datetime.strptime(date_str, '%d.%m.%Y')
         return date
     
-    def interfase_loop(instruction, write, menu):
+    def interfase(instruction, menu):
         while True:
             instruction()
-
-            if write:
-                # FIXME: Запись изменений в файл с параметрами
-                pass
 
             a = input(menu)
 

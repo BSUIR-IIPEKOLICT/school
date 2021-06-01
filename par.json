@@ -1,0 +1,73 @@
+[
+    [
+        {
+            "name": "Игорь",
+            "surname": "Макар",
+            "address": "Вильнюс",
+            "id": 0
+        },
+        {
+            "name": "Александр",
+            "surname": "Лукашенко",
+            "address": "Минск",
+            "id": 1
+        },
+        {
+            "name": "Риаз",
+            "surname": "Гремори",
+            "address": "Лошица",
+            "id": 2
+        }
+    ],
+    [
+        {
+            "value": 9,
+            "subject_id": 0,
+            "pupil_id": 2,
+            "date": "21.05.2021",
+            "id": 0
+        },
+        {
+            "value": 2,
+            "subject_id": 0,
+            "pupil_id": 1,
+            "date": "12.05.2021",
+            "id": 1
+        },
+        {
+            "value": 6,
+            "subject_id": 1,
+            "pupil_id": 0,
+            "date": "10.05.2021",
+            "id": 2
+        },
+        {
+            "value": 8,
+            "subject_id": 3,
+            "pupil_id": 0,
+            "date": "14.05.2021",
+            "id": 3
+        },
+        {
+            "value": 1,
+            "subject_id": 2,
+            "pupil_id": 1,
+            "date": "18.05.2021",
+            "id": 4
+        }
+    ],
+    [
+        {
+            "name": "Математика",
+            "id": 0
+        },
+        {
+            "name": "Физика",
+            "id": 1
+        },
+        {
+            "name": "История",
+            "id": 2
+        }
+    ]
+]

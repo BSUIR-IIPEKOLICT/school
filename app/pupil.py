@@ -1,4 +1,5 @@
 from app.ui import Ui
+
 from app.string import *
 
 class Pupil:

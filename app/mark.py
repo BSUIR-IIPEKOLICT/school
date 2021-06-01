@@ -1,9 +1,9 @@
-from typing import List
+import datetime
+
 from app.ui import Ui
 from app.subject import Subject
 from app.pupil import Pupil
 from app.average import Average
-import datetime
 
 from app.string import *
 

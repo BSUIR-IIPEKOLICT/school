@@ -1,4 +1,4 @@
-from app.ui import Ui
+from app.ui import *
 from app.subject import Subject
 
 from app.string import *

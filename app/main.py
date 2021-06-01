@@ -5,12 +5,13 @@ from app.ui import Ui
 from app.pupil import Pupil
 from app.mark import Mark
 from app.subject import Subject
+from app.file import File
 
 from app.string import *
 
 # BLOCK: Дефолтные параметры
 
-par = [
+defaultPar = [
     [
         Pupil('Игорь', 'Макар', 'Вильнюс', 0),
         Pupil('Александр', 'Лукашенко', 'Минск', 1),
@@ -29,6 +30,8 @@ par = [
         Subject('История', 2)
     ]
 ]
+
+par = File.load(File.read(file_path, file_name, File.build(defaultPar)))
 
 # BLOCK: Инструкции для интерфейсов
 
@@ -74,6 +77,8 @@ def averageMarkLarger():
 
 # BLOCK: Сама прога
 
+Ui.header(about)
+
 while True:
     Ui.header(main_menu)
     a = input()
@@ -86,9 +91,9 @@ while True:
             b = input(menu_1)
 
             if int(b) == 1:
-                Ui.interfase_loop(createPupil, True, menu_11)
+                Ui.interfase(createPupil, menu_11)
             elif int(b) == 2:
-                Ui.interfase_loop(changePupil, True, menu_12)
+                Ui.interfase(changePupil, menu_12)
             else:
                 break
     elif int(a) == 2:
@@ -98,13 +103,13 @@ while True:
             b = input(menu_2)
 
             if int(b) == 1:
-                Ui.interfase_loop(createMark, True, menu_21)
+                Ui.interfase(createMark, menu_21)
             elif int(b) == 2:
-                Ui.interfase_loop(markChronology, False, menu_22)
+                Ui.interfase(markChronology, menu_22)
             elif int(b) == 3:
-                Ui.interfase_loop(markInInterval, False, menu_23)
+                Ui.interfase(markInInterval, menu_23)
             elif int(b) == 4:
-                Ui.interfase_loop(markedPupils, False, menu_24)
+                Ui.interfase(markedPupils, menu_24)
             else:
                 break
     elif int(a) == 3:
@@ -115,9 +120,9 @@ while True:
             b = input(menu_3)
 
             if int(b) == 1:
-                Ui.interfase_loop(createSubject, True, menu_31)
+                Ui.interfase(createSubject, menu_31)
             elif int(b) == 2:
-                Ui.interfase_loop(changeSubject, True, menu_32)
+                Ui.interfase(changeSubject, menu_32)
             else:
                 break
     elif int(a) == 4:
@@ -128,9 +133,9 @@ while True:
             b = input(menu_4)
 
             if int(b) == 1:
-                Ui.interfase_loop(averageMarkSubject, False, menu_41)
+                Ui.interfase(averageMarkSubject, menu_41)
             elif int(b) == 2:
-                Ui.interfase_loop(averageMarkLarger, False, menu_42)
+                Ui.interfase(averageMarkLarger, menu_42)
             else:
                 break
     else:

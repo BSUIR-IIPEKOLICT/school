@@ -166,3 +166,8 @@ error_empty = 'ОШИБКА: ничего не было введено.\n'
 error_nodigit = 'ОШИБКА: необходимо ввести число.\n'
 error_wrong = 'ОШИБКА: введено неверное значение.\n'
 error_nodate = 'ОШИБКА: неверная дата.\n'
+
+# BLOCK: Работа с файлом
+
+file_name = 'par.json'
+file_path = 'par.json'
