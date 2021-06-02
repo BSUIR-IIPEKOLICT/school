@@ -1,10 +1,12 @@
+# MODULE: Класс для оценок
+
 import datetime
 
-from app.ui import Ui
 from app.subject import Subject
 from app.pupil import Pupil
 from app.average import Average
 
+from app.lib import *
 from app.string import *
 
 class Mark:
@@ -16,10 +18,10 @@ class Mark:
         self.id = id
 
     def create_mark(par):
-        value = Ui.enter_int(mark_value, 0, 10)
+        value = enter_int(mark_value, 0, 10)
         subject_id = Subject.choose_subject(par).id
         pupil_id = Pupil.choose_pupil(par).id
-        date = Ui.enter_date()
+        date = enter_date()
         id = len(par[1])
 
         new = Mark(value, subject_id, pupil_id, date, id)
@@ -47,13 +49,13 @@ class Mark:
 
     def mark_in_interval(par):
         pupil = Pupil.choose_pupil(par)
-        start = Ui.enter_date(date_start)
-        end = Ui.enter_date(date_end)
+        start = enter_date(date_start)
+        end = enter_date(date_end)
         data = dict()
 
         for mark in par[1]:
             if mark.pupil_id == pupil.id:
-                if Ui.convert_date(start) <= Ui.convert_date(mark.date) <= Ui.convert_date(end):
+                if convert_date(start) <= convert_date(mark.date) <= convert_date(end):
                     data[mark.date] = mark.id
 
         sorted_data = sorted(data.items(), key = lambda x:datetime.datetime.strptime(x[0], '%d.%m.%Y'), reverse = False)
@@ -77,5 +79,5 @@ class Mark:
             print('Учащийся {0} {1}, средний балл по предмету: {2}.'.format(item[0], item[1], item[2]))
         
         print('\nСписок лоботрясов по предмету {}:\n'.format(subject.name))
-        for item in array[1]:
-            print('Учащийся {0} {1}.'.format(item[0], item[1]))
+        for item_ in array[1]:
+            print('Учащийся {0} {1}.'.format(item_[0], item_[1]))

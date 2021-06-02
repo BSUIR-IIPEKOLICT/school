@@ -1,5 +1,6 @@
-from app.ui import Ui
+# MODULE: Класс для дисциплин
 
+from app.lib import *
 from app.string import *
 
 class Subject:
@@ -13,14 +14,14 @@ class Subject:
 
     def choose_subject(par):
         Subject.subject_list(par)
-        id = Ui.enter_int(subject_id, 1, len(par[2])) - 1
+        id = enter_int(subject_id, 1, len(par[2])) - 1
 
         for subject in par[2]:
             if subject.id == id:
                 return subject
 
     def create_subject(par):
-        name = Ui.enter(subject_name)
+        name = enter(subject_name)
         id = len(par[2])
 
         new = Subject(name, id)
@@ -31,4 +32,4 @@ class Subject:
         subject = Subject.choose_subject(par)
 
         print('Старое имя дисциплины: {}'.format(subject.name))
-        subject.name = Ui.enter(subject_name)
+        subject.name = enter(subject_name)

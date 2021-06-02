@@ -1,6 +1,8 @@
-from app.ui import *
+# MODULE: Класс для подсчета среднего балла
+
 from app.subject import Subject
 
+from app.lib import *
 from app.string import *
 
 class Average:
@@ -17,16 +19,17 @@ class Average:
         return rez
 
     def average_mark_interval(par, subject):
-        start = Ui.enter_date(date_start)
-        end = Ui.enter_date(date_end)
-        list_marked = list_nomarked = []
+        start = enter_date(date_start)
+        end = enter_date(date_end)
+        list_marked = []
+        list_nomarked = []
 
         for pupil in par[0]:
             sum = 0
             i = 0
 
             for mark in par[1]:
-                if Ui.convert_date(start) <= Ui.convert_date(mark.date) <= Ui.convert_date(end):
+                if convert_date(start) <= convert_date(mark.date) <= convert_date(end):
                     if mark.subject_id == subject.id and mark.pupil_id == pupil.id:
                         sum += mark.value
                         i += 1
@@ -50,7 +53,7 @@ class Average:
 
     def average_mark_larger(par):
         subject = Subject.choose_subject(par)
-        value = Ui.enter_int(mark_user, 0, 9)
+        value = enter_int(mark_user, 0, 9)
         print('Список учащихся, у которых средний балл по предмету {0} выше {1}\n'.format(subject.name, value))
         i = 0
 

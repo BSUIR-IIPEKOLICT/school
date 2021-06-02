@@ -1,3 +1,5 @@
+# MODULE: Методы для работы с файлом
+
 import json
 import os.path
 
@@ -6,39 +8,44 @@ from app.mark import Mark
 from app.subject import Subject
 
 class File:
-    def read(path, file, default):
+    def read(path, name, default):
         parJson = None
 
         if os.path.isfile(path):
-            with open(file, 'r') as f:
+            with open(name, 'r') as f:
                 parJson = json.loads(f.read())
         else:
             parJson = json.loads(json.dumps(default, ensure_ascii = False))
-            with open(file, 'w+') as f:
+            with open(name, 'w+') as f:
                 f.write(json.dumps(default, ensure_ascii = False, indent = 4))
 
         return parJson
 
-    def write(path, file, parJson) -> None:
+    def write(path, name, parJson) -> None:
         if os.path.isfile(path):
-            with open(file, 'w+') as f:
+            with open(name, 'w+') as f:
                 f.seek(0)
                 f.close()
         
-        with open(file, 'w+') as f:
+        with open(name, 'w+') as f:
             f.write(json.dumps(parJson, ensure_ascii = False, indent = 4))
 
-    def build(parPython):
-        pupils = []
+    def build_pupils(parPython):
+        pupilsJson = []
+        
         for pupil in parPython[0]:
             new = dict()
             new['name'] = pupil.name
             new['surname'] = pupil.surname
             new['address'] = pupil.address
             new['id'] = pupil.id
-            pupils.append(new)
+            pupilsJson.append(new)
+        
+        return pupilsJson
 
-        marks = []
+    def build_marks(parPython):
+        marksJson = []
+
         for mark in  parPython[1]:
             new = dict()
             new['value'] = mark.value
@@ -46,16 +53,23 @@ class File:
             new['pupil_id'] = mark.pupil_id
             new['date'] = mark.date
             new['id'] = mark.id
-            marks.append(new)
+            marksJson.append(new)
+        
+        return marksJson
 
-        subjects = []
+    def build_subjects(parPython):
+        subjectsJson = []
+
         for subject in parPython[2]:
             new = dict()
             new['name'] = subject.name
             new['id'] = subject.id
-            subjects.append(new)
+            subjectsJson.append(new)
 
-        parJson = [pupils, marks, subjects]
+        return subjectsJson
+
+    def build(parPython):
+        parJson = [File.build_pupils(parPython), File.build_marks(parPython), File.build_subjects(parPython)]
         return parJson
 
     def load(parJson):
