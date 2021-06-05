@@ -9,31 +9,31 @@ from app.subject import Subject
 
 class File:
     def read(path, name, default):
-        parJson = None
+        dataJson = None
 
         if os.path.isfile(path):
             with open(name, 'r') as f:
-                parJson = json.loads(f.read())
+                dataJson = json.loads(f.read())
         else:
-            parJson = json.loads(json.dumps(default, ensure_ascii = False))
+            dataJson = json.loads(json.dumps(default, ensure_ascii = False))
             with open(name, 'w+') as f:
                 f.write(json.dumps(default, ensure_ascii = False, indent = 4))
 
-        return parJson
+        return dataJson
 
-    def write(path, name, parJson) -> None:
+    def write(path, name, dataJson) -> None:
         if os.path.isfile(path):
             with open(name, 'w+') as f:
                 f.seek(0)
                 f.close()
         
         with open(name, 'w+') as f:
-            f.write(json.dumps(parJson, ensure_ascii = False, indent = 4))
+            f.write(json.dumps(dataJson, ensure_ascii = False, indent = 4))
 
-    def build_pupils(parPython):
+    def build_pupils(dataPython):
         pupilsJson = []
         
-        for pupil in parPython[0]:
+        for pupil in dataPython[0]:
             new = dict()
             new['name'] = pupil.name
             new['surname'] = pupil.surname
@@ -43,10 +43,10 @@ class File:
         
         return pupilsJson
 
-    def build_marks(parPython):
+    def build_marks(dataPython):
         marksJson = []
 
-        for mark in  parPython[1]:
+        for mark in  dataPython[1]:
             new = dict()
             new['value'] = mark.value
             new['subject_id'] = mark.subject_id
@@ -57,10 +57,10 @@ class File:
         
         return marksJson
 
-    def build_subjects(parPython):
+    def build_subjects(dataPython):
         subjectsJson = []
 
-        for subject in parPython[2]:
+        for subject in dataPython[2]:
             new = dict()
             new['name'] = subject.name
             new['id'] = subject.id
@@ -68,25 +68,24 @@ class File:
 
         return subjectsJson
 
-    def build(parPython):
-        parJson = [File.build_pupils(parPython), File.build_marks(parPython), File.build_subjects(parPython)]
-        return parJson
+    def build(dataPython):
+        dataJson = [File.build_pupils(dataPython), File.build_marks(dataPython), File.build_subjects(dataPython)]
+        return dataJson
 
-    def load(parJson):
+    def load(dataJson):
         pupils = []
-        for pupil in parJson[0]:
+        for pupil in dataJson[0]:
             new = Pupil(pupil['name'], pupil['surname'], pupil['address'], int(pupil['id']))
             pupils.append(new)
 
         marks = []
-        for mark in parJson[1]:
+        for mark in dataJson[1]:
             new = Mark(int(mark['value']), int(mark['subject_id']), int(mark['pupil_id']), mark['date'], int(mark['id']))
             marks.append(new)
 
         subjects = []
-        for subject in parJson[2]:
+        for subject in dataJson[2]:
             new = Subject(subject['name'], int(subject['id']))
             subjects.append(new)
 
-        parPython = [pupils, marks, subjects]
-        return parPython
+        return [pupils, marks, subjects] # dataJson

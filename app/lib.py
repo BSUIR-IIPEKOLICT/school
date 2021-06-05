@@ -44,20 +44,18 @@ def enter_date(text = ''):
 
         try:
             datetime.date(y, m, d)
-            date_str = datetime.datetime(y, m, d).strftime('%d.%m.%Y')
-            return date_str
+            return datetime.datetime(y, m, d).strftime('%d.%m.%Y') # dateStr
         except:
             print(error_nodate)
             continue
 
-def convert_date(date_str):
-    date = datetime.datetime.strptime(date_str, '%d.%m.%Y')
-    return date
+def convert_date(dateStr):
+    return datetime.datetime.strptime(dateStr, '%d.%m.%Y') # dateDatetime
 
 def interfase(instruction, menu):
     while True:
         instruction()
-
+        
         a = input(menu)
 
         if int(a) == 1:

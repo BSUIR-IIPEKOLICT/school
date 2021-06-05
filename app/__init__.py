@@ -11,7 +11,7 @@ from app.string import *
 
 # BLOCK: Дефолтные параметры
 
-defaultPar = [
+defaultData = [ # python-формат
     [
         Pupil('Иван', 'Иванов', 'г. Минск', 0),
         Pupil('Александр', 'Серов', 'г. Лошица', 1),
@@ -38,54 +38,54 @@ defaultPar = [
     ]
 ]
 
-par = File.load(File.read(file_path, file_name, File.build(defaultPar)))
+dataPython = File.load(File.read(file_path, file_name, File.build(defaultData)))
 
 # BLOCK: Инструкции для интерфейсов
 
 def createPupil():
     header(header_11)
-    Pupil.create_pupil(par)
-    File.write(file_path, file_name, File.build(par))
+    Pupil.create_pupil(dataPython)
+    File.write(file_path, file_name, File.build(dataPython))
 
 def changePupil():
     header(header_12)
-    Pupil.change_pupil(par)
-    File.write(file_path, file_name, File.build(par))
+    Pupil.change_pupil(dataPython)
+    File.write(file_path, file_name, File.build(dataPython))
 
 def createMark():
     header(header_21)
-    Mark.create_mark(par)
-    File.write(file_path, file_name, File.build(par))
+    Mark.create_mark(dataPython)
+    File.write(file_path, file_name, File.build(dataPython))
 
 def markChronology():
     header(header_22)
-    Mark.mark_chronology(par)
+    Mark.mark_chronology(dataPython)
 
 def markInInterval():
     header(header_23)
-    Mark.mark_in_interval(par)
+    Mark.mark_in_interval(dataPython)
 
 def markedPupils():
     header(header_24)
-    Mark.marked_pupils(par)
+    Mark.marked_pupils(dataPython)
 
 def createSubject():
     header(header_31)
-    Subject.create_subject(par)
-    File.write(file_path, file_name, File.build(par))
+    Subject.create_subject(dataPython)
+    File.write(file_path, file_name, File.build(dataPython))
 
 def changeSubject():
     header(header_32)
-    Subject.change_subject(par)
-    File.write(file_path, file_name, File.build(par))
+    Subject.change_subject(dataPython)
+    File.write(file_path, file_name, File.build(dataPython))
 
 def averageMarkSubject():
     header(header_41)
-    Average.average_mark_subject(par)
+    Average.average_mark_subject(dataPython)
 
 def averageMarkLarger():
     header(header_42)
-    Average.average_mark_larger(par)
+    Average.average_mark_larger(dataPython)
 
 # BLOCK: Сама прога
 
@@ -98,7 +98,7 @@ while True:
     if int(a) == 1:
         while True:
             header(header_1)
-            Pupil.pupil_table(par)
+            Pupil.pupil_table(dataPython)
 
             b = input(menu_1)
 
@@ -127,7 +127,7 @@ while True:
     elif int(a) == 3:
         while True:
             header(header_3)
-            Subject.subject_list(par)
+            Subject.subject_list(dataPython)
 
             b = input(menu_3)
 
@@ -140,7 +140,7 @@ while True:
     elif int(a) == 4:
         while True:
             header(header_4)
-            Average.average_total(par)
+            Average.average_total(dataPython)
 
             b = input(menu_4)
 
