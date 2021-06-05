@@ -12,13 +12,13 @@ from app.string import *
 # BLOCK: Дефолтные параметры
 
 defaultData = [ # python-формат
-    [
+    [ # список учеников
         Pupil('Иван', 'Иванов', 'г. Минск', 0),
         Pupil('Александр', 'Серов', 'г. Лошица', 1),
         Pupil('Сергей', 'Миронов', 'г. Жодино', 2),
         Pupil('Евгений', 'Кривоносов', 'г. Барановичи', 3)
     ],
-    [
+    [ # список оценок
         Mark(9, 0, 0, '12.05.2021', 0),
         Mark(2, 0, 1, '19.05.2021', 1),
         Mark(6, 0, 1, '14.05.2021', 2),
@@ -31,14 +31,14 @@ defaultData = [ # python-формат
         Mark(5, 2, 2, '12.05.2021', 9),
         Mark(8, 2, 2, '18.05.2021', 10)
     ],
-    [
+    [ # список предметов
         Subject('Математика', 0),
         Subject('Физика', 1),
         Subject('История', 2)
     ]
 ]
 
-dataPython = File.load(File.read(file_path, file_name, File.build(defaultData)))
+dataPython = File.load(File.read(file_path, file_name, File.build(defaultData))) # данные программы (дефолт/из файла)
 
 # BLOCK: Инструкции для интерфейсов
 
@@ -98,7 +98,7 @@ while True:
     if int(a) == 1:
         while True:
             header(header_1)
-            Pupil.pupil_table(dataPython)
+            Pupil.pupil_list(dataPython)
 
             b = input(menu_1)
 

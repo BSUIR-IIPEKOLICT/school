@@ -12,59 +12,61 @@ from app.string import *
 # Здесь data = dataPython 
 
 class Mark:
-    def __init__(self, value, subject_id, pupil_id, date, id = None) -> None:
+    def __init__(self, value, subject_id, pupil_id, date, id = None) -> None: # конструктор объекта
         self.value = value
         self.subject_id = subject_id
         self.pupil_id = pupil_id
         self.date = date
         self.id = id
 
-    def create_mark(data):
-        value = enter_int(mark_value, 0, 10)
-        subject_id = Subject.choose_subject(data).id
-        pupil_id = Pupil.choose_pupil(data).id
-        date = enter_date()
-        id = len(data[1])
+    def create_mark(data): # создание оценки
+        value = enter_int(mark_value, 0, 10) # значение
+        subject_id = Subject.choose_subject(data).id # определение id предмета
+        pupil_id = Pupil.choose_pupil(data).id # определение id ученика
+        date = enter_date() # дата
+        id = len(data[1]) # генерация id оценки
 
-        new = Mark(value, subject_id, pupil_id, date, id)
-        data[1].append(new)
+        new = Mark(value, subject_id, pupil_id, date, id) # объект
+        data[1].append(new) # добавление объекта в список оценок
         return new # запасной вывод
 
-    def mark_chronology(data):
-        pupil = Pupil.choose_pupil(data)
-        subject = Subject.choose_subject(data)
+    def mark_chronology(data): # функция для показа оценок в хронол порядке
+        pupil = Pupil.choose_pupil(data) # выбор ученика
+        subject = Subject.choose_subject(data) # выбор предмета
         d = dict()
 
-        for mark in data[1]:
-            for subject_ in data[2]:
-                if mark.pupil_id == pupil.id and mark.subject_id == subject_.id:
-                    d[mark.date] = mark.id
+        for mark in data[1]: # перебор оценок
+            for subject_ in data[2]: # и предметов
+                if mark.pupil_id == pupil.id and mark.subject_id == subject_.id: # если наши
+                    d[mark.date] = mark.id # добавить в словарь
         
         sorted_d = sorted(d.items(), key = lambda x:datetime.datetime.strptime(x[0], '%d.%m.%Y'), reverse = False)
+        # сортировка словаря в хронолог порядке
         print('\nОценки учащегося {0} {1} по предмету {2} в хронологическом порядке:\n'
         .format(pupil.name, pupil.surname, subject.name))
 
-        for item in sorted_d:
+        for item in sorted_d: # последвательный вывод инфы из отсортированного словаря
             for mark in data[1]:
                 if mark.id == int(item[1]):
                     print('Дата: {0}, получена оценка {1}.'.format(item[0], mark.value))
 
-    def mark_in_interval(data):
-        pupil = Pupil.choose_pupil(data)
-        start = enter_date(date_start)
-        end = enter_date(date_end)
+    def mark_in_interval(data): # функция для показа оценок за интервал
+        pupil = Pupil.choose_pupil(data) # выбор ученика
+        start = enter_date(date_start) # начало интервала
+        end = enter_date(date_end) # конец интервала
         d = dict()
 
-        for mark in data[1]:
-            if mark.pupil_id == pupil.id:
-                if convert_date(start) <= convert_date(mark.date) <= convert_date(end):
-                    d[mark.date] = mark.id
+        for mark in data[1]: # перебор оценок
+            if mark.pupil_id == pupil.id: # если оценки этого ученика
+                if convert_date(start) <= convert_date(mark.date) <= convert_date(end): # и входят в диапазон
+                    d[mark.date] = mark.id # добавить в словарь
 
         sorted_d = sorted(d.items(), key = lambda x:datetime.datetime.strptime(x[0], '%d.%m.%Y'), reverse = False)
+        # сортировка словаря в хронолог порядке
         print('\nОценки учащегося {0} {1} в период с {2} по {3}:\n'
             .format(pupil.name, pupil.surname, start, end))
 
-        for item in sorted_d:
+        for item in sorted_d: # последвательный вывод инфы из отсортированного словаря
             for mark in data[1]:
                 if mark.id == int(item[1]):
                     for subject in data[2]:
@@ -72,14 +74,14 @@ class Mark:
                             print('Дата: {0}, получена оценка {1} по дисциплине {2}.'
                             .format(item[0], mark.value, subject.name))
 
-    def marked_pupils(data):
-        subject = Subject.choose_subject(data)
-        array = Average.average_mark_interval(data, subject)
+    def marked_pupils(data): # функция для показа аттестованных учеников в течение интервала
+        subject = Subject.choose_subject(data) # выбор предмета
+        array = Average.average_mark_interval(data, subject) # расчет среднего балла во временном интервале
 
         print('\nСписок аттестованных учащихся по предмету {}:\n'.format(subject.name))
         for item in array[0]:
             print('Учащийся {0} {1}, средний балл по предмету: {2}.'.format(item[0], item[1], item[2]))
         
-        print('\nСписок лоботрясов по предмету {}:\n'.format(subject.name))
+        print('\nСписок неаттестованных учащихся по предмету {}:\n'.format(subject.name))
         for item in array[1]:
             print('Учащийся {0} {1}.'.format(item[0], item[1]))

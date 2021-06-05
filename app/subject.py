@@ -6,34 +6,34 @@ from app.string import *
 # Здесь data = dataPython 
 
 class Subject:
-    def __init__(self, name, id = None) -> None:
+    def __init__(self, name, id = None) -> None: # конструктор объекта
         self.name = name
         self.id = id
 
-    def subject_list(data):
+    def subject_list(data): # список предметов
         print(subject_header)
         
         for index, subject in enumerate(data[2]):
             print('#{0} - {1}.'.format(index + 1, subject.name))
 
-    def choose_subject(data):
-        Subject.subject_list(data)
-        id = enter_int(subject_id, 1, len(data[2])) - 1
+    def choose_subject(data): # выбор предмета
+        Subject.subject_list(data) # список предметов
+        id = enter_int(subject_id, 1, len(data[2])) - 1 # ввод номера в списке (id = номер - 1)
 
-        for subject in data[2]:
-            if subject.id == id:
-                return subject
+        for subject in data[2]: # перебор предметов
+            if subject.id == id: # если id совпадают
+                return subject # то это он
 
-    def create_subject(data):
-        name = enter(subject_name)
-        id = len(data[2])
+    def create_subject(data): # создание предмета
+        name = enter(subject_name) # имя
+        id = len(data[2]) # генерация id
 
-        new = Subject(name, id)
-        data[2].append(new)
-        return new
+        new = Subject(name, id) # создание объекта
+        data[2].append(new) # добавление в список предметов
+        return new # запасной вывод
 
-    def change_subject(data):
-        subject = Subject.choose_subject(data)
+    def change_subject(data): # изменение предмета
+        subject = Subject.choose_subject(data) # выбор предмета
 
         print('Старое имя дисциплины: {}'.format(subject.name))
         subject.name = enter(subject_name)
