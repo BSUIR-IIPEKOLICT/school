@@ -46,16 +46,16 @@ class Average:
 
     def average_mark_subject(data):
         subject = Subject.choose_subject(data)
-        print('Средний балл учащихся по предмету {}\n'.format(subject.name))
+        print('\nСредний балл учащихся по предмету {}:\n'.format(subject.name))
 
         for pupil in data[0]:
-            print('{0} {1}: средний балл равен {2}.'
+            print('\t{0} {1}: {2}.'
             .format(pupil.name, pupil.surname, Average.average_mark(data, pupil, subject)))
 
     def average_mark_larger(data):
         subject = Subject.choose_subject(data)
         value = enter_int(mark_user, 0, 9)
-        print('Список учащихся, у которых средний балл по предмету {0} выше {1}\n'.format(subject.name, value))
+        print('\nСписок учащихся, у которых средний балл по предмету {0} выше {1}:\n'.format(subject.name, value))
         i = 0
 
         for pupil in data[0]:

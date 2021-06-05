@@ -13,6 +13,8 @@ class Pupil:
         self.id = id
 
     def pupil_table(data):
+        print(pupil_header)
+        
         for index, pupil in enumerate(data[0]):
             print('#{0} - учащийся {1} {2}, адрес: {3}.'
             .format(index + 1, pupil.name, pupil.surname, pupil.address))
@@ -40,15 +42,15 @@ class Pupil:
 
         a = input(pupil_change_name)
         if int(a) == 1:
-            print('Старое имя: {}'.format(pupil.name))
+            print('\nСтарое имя: {}'.format(pupil.name))
             pupil.name = enter(pupil_name)
 
         a = input(pupil_change_surname)
         if int(a) == 1:
-            print('Старая фамилия: {}'.format(pupil.surname))
+            print('\nСтарая фамилия: {}'.format(pupil.surname))
             pupil.surname = enter(pupil_surname)
 
         a = input(pupil_change_address)
         if int(a) == 1:
-            print('Старый адрес: {}'.format(pupil.address))
+            print('\nСтарый адрес: {}'.format(pupil.address))
             pupil.address = enter(pupil_address)

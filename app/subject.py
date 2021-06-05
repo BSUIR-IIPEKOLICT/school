@@ -11,6 +11,8 @@ class Subject:
         self.id = id
 
     def subject_list(data):
+        print(subject_header)
+        
         for index, subject in enumerate(data[2]):
             print('#{0} - {1}.'.format(index + 1, subject.name))
 

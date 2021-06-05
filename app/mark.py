@@ -33,18 +33,18 @@ class Mark:
     def mark_chronology(data):
         pupil = Pupil.choose_pupil(data)
         subject = Subject.choose_subject(data)
-        data = dict()
+        d = dict()
 
         for mark in data[1]:
             for subject_ in data[2]:
                 if mark.pupil_id == pupil.id and mark.subject_id == subject_.id:
-                    data[mark.date] = mark.id
+                    d[mark.date] = mark.id
         
-        sorted_data = sorted(data.items(), key = lambda x:datetime.datetime.strptime(x[0], '%d.%m.%Y'), reverse = False)
-        print('\nОценки учащегося {0} {1} по предмету {2} в хронологическом порядке\n'
+        sorted_d = sorted(d.items(), key = lambda x:datetime.datetime.strptime(x[0], '%d.%m.%Y'), reverse = False)
+        print('\nОценки учащегося {0} {1} по предмету {2} в хронологическом порядке:\n'
         .format(pupil.name, pupil.surname, subject.name))
 
-        for item in sorted_data:
+        for item in sorted_d:
             for mark in data[1]:
                 if mark.id == int(item[1]):
                     print('Дата: {0}, получена оценка {1}.'.format(item[0], mark.value))
@@ -61,7 +61,7 @@ class Mark:
                     d[mark.date] = mark.id
 
         sorted_d = sorted(d.items(), key = lambda x:datetime.datetime.strptime(x[0], '%d.%m.%Y'), reverse = False)
-        print('\nОценки учащегося {0} {1} в период с {2} по {3}\n'
+        print('\nОценки учащегося {0} {1} в период с {2} по {3}:\n'
             .format(pupil.name, pupil.surname, start, end))
 
         for item in sorted_d:
