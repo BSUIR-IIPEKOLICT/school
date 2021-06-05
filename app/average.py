@@ -49,7 +49,7 @@ class Average:
         print('\nСредний балл учащихся по предмету {}:\n'.format(subject.name))
 
         for pupil in data[0]: # перебор учеников
-            print('{0} {1}: {2}.'
+            print('\t{0} {1}: {2}.'
             .format(pupil.name, pupil.surname, Average.average_mark(data, pupil, subject)))
 
     def average_mark_larger(data): # показ списка учеников со средним баллом выше заданного
