@@ -24,10 +24,10 @@ class Mark:
         subject_id = Subject.choose_subject(data).id # определение id предмета
         pupil_id = Pupil.choose_pupil(data).id # определение id ученика
         date = enter_date() # дата
-        id = len(data[1]) # генерация id оценки
+        id = len(data['marks']) # генерация id оценки
 
         new = Mark(value, subject_id, pupil_id, date, id) # объект
-        data[1].append(new) # добавление объекта в список оценок
+        data['marks'].append(new) # добавление объекта в список оценок
         return new # запасной вывод
 
     def mark_chronology(data): # функция для показа оценок в хронол порядке
@@ -35,8 +35,8 @@ class Mark:
         subject = Subject.choose_subject(data) # выбор предмета
         d = dict()
 
-        for mark in data[1]: # перебор оценок
-            for subject_ in data[2]: # и предметов
+        for mark in data['marks']: # перебор оценок
+            for subject_ in data['subjects']: # и предметов
                 if mark.pupil_id == pupil.id and mark.subject_id == subject_.id: # если наши
                     d[mark.date] = mark.id # добавить в словарь
         
@@ -46,7 +46,7 @@ class Mark:
         .format(pupil.name, pupil.surname, subject.name))
 
         for item in sorted_d: # последвательный вывод инфы из отсортированного словаря
-            for mark in data[1]:
+            for mark in data['marks']:
                 if mark.id == int(item[1]):
                     print('Дата: {0}, получена оценка {1}.'.format(item[0], mark.value))
 
@@ -56,7 +56,7 @@ class Mark:
         end = enter_date(date_end) # конец интервала
         d = dict()
 
-        for mark in data[1]: # перебор оценок
+        for mark in data['marks']: # перебор оценок
             if mark.pupil_id == pupil.id: # если оценки этого ученика
                 if convert_date(start) <= convert_date(mark.date) <= convert_date(end): # и входят в диапазон
                     d[mark.date] = mark.id # добавить в словарь
@@ -67,9 +67,9 @@ class Mark:
             .format(pupil.name, pupil.surname, start, end))
 
         for item in sorted_d: # последвательный вывод инфы из отсортированного словаря
-            for mark in data[1]:
+            for mark in data['marks']:
                 if mark.id == int(item[1]):
-                    for subject in data[2]:
+                    for subject in data['subjects']:
                         if subject.id == mark.subject_id:
                             print('Дата: {0}, получена оценка {1} по дисциплине {2}.'
                             .format(item[0], mark.value, subject.name))

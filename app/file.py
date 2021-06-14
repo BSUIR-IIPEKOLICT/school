@@ -33,58 +33,64 @@ class File:
     def build_pupils(dataPython): # преобразование инфы об учениках из питоновского в json-формат
         pupilsJson = []
         
-        for pupil in dataPython[0]: # перебор учеников
-            new = dict() # каждый ученик - словарь
-            new['name'] = pupil.name
-            new['surname'] = pupil.surname
-            new['address'] = pupil.address
-            new['id'] = pupil.id
-            pupilsJson.append(new) # добавить словарь в итоговый лист
+        for pupil in dataPython['pupils']: # перебор учеников
+            pupilsJson.append({ # каждый ученик - словарь
+                'name':     pupil.name,
+                'surname':  pupil.surname,
+                'address':  pupil.address,
+                'id':       pupil.id
+            }) # добавить словарь в итоговый лист
         
         return pupilsJson # лист учеников в json
 
     def build_marks(dataPython): # преобразование инфы об оценках из питоновского в json-формат
         marksJson = []
 
-        for mark in  dataPython[1]: # перебор оценок
-            new = dict() # каждая оценка - словарь
-            new['value'] = mark.value
-            new['subject_id'] = mark.subject_id
-            new['pupil_id'] = mark.pupil_id
-            new['date'] = mark.date
-            new['id'] = mark.id
-            marksJson.append(new) # добавить словарь в итоговый лист
+        for mark in  dataPython['marks']: # перебор оценок
+            marksJson.append({ # каждая оценка - словарь
+                'value':        mark.value,
+                'subject_id':   mark.subject_id,
+                'pupil_id':     mark.pupil_id,
+                'date':         mark.date,
+                'id':           mark.id
+            }) # добавить словарь в итоговый лист
         
         return marksJson # лист оценок в json
 
     def build_subjects(dataPython): # преобразование инфы о предметах из питоновского в json-формат
         subjectsJson = []
 
-        for subject in dataPython[2]: # перебор предметов
-            new = dict() # каждый предмет - словарь
-            new['name'] = subject.name
-            new['id'] = subject.id
-            subjectsJson.append(new) # добавить словарь в итоговый лист
+        for subject in dataPython['subjects']: # перебор предметов
+            subjectsJson.append({ # каждый предмет - словарь
+                'name': subject.name,
+                'id':   subject.id
+            }) # добавить словарь в итоговый лист
 
         return subjectsJson # лист предметов в json
 
     def build(dataPython): # сборка полного файла json
-        return [File.build_pupils(dataPython), File.build_marks(dataPython), File.build_subjects(dataPython)]
+        return { # dataJson
+            'pupils':   File.build_pupils(dataPython),
+            'marks':    File.build_marks(dataPython),
+            'subjects': File.build_subjects(dataPython)
+        }
 
     def load(dataJson): # Преобразование json-строки данных в питон-формат
         pupils = []
-        for pupil in dataJson[0]:
-            new = Pupil(pupil['name'], pupil['surname'], pupil['address'], int(pupil['id']))
-            pupils.append(new)
+        for pupil in dataJson['pupils']:
+            pupils.append(Pupil(pupil['name'], pupil['surname'], pupil['address'], int(pupil['id'])))
 
         marks = []
-        for mark in dataJson[1]:
-            new = Mark(int(mark['value']), int(mark['subject_id']), int(mark['pupil_id']), mark['date'], int(mark['id']))
-            marks.append(new)
+        for mark in dataJson['marks']:
+            marks.append(Mark(int(mark['value']), int(mark['subject_id']), int(mark['pupil_id']), 
+            mark['date'], int(mark['id'])))
 
         subjects = []
-        for subject in dataJson[2]:
-            new = Subject(subject['name'], int(subject['id']))
-            subjects.append(new)
+        for subject in dataJson['subjects']:
+            subjects.append(Subject(subject['name'], int(subject['id'])))
 
-        return [pupils, marks, subjects] # dataPython
+        return { # dataPython
+            'pupils': pupils, 
+            'marks': marks,
+            'subjects': subjects
+        }
