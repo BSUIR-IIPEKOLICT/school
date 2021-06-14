@@ -8,37 +8,11 @@ from app.file import File
 
 from app.lib import *
 from app.string import *
+from app.default import defaultData
 
 # BLOCK: Дефолтные параметры
 
-defaultData = [ # python-формат
-    [ # список учеников
-        Pupil('Иван', 'Иванов', 'г. Минск', 0),
-        Pupil('Александр', 'Серов', 'г. Лошица', 1),
-        Pupil('Сергей', 'Миронов', 'г. Жодино', 2),
-        Pupil('Евгений', 'Кривоносов', 'г. Барановичи', 3)
-    ],
-    [ # список оценок
-        Mark(9, 0, 0, '12.05.2021', 0),
-        Mark(2, 0, 1, '19.05.2021', 1),
-        Mark(6, 0, 1, '14.05.2021', 2),
-        Mark(8, 0, 2, '11.05.2021', 3),
-        Mark(4, 1, 0, '18.05.2021', 4),
-        Mark(5, 1, 1, '03.05.2021', 5),
-        Mark(7, 1, 2, '09.05.2021', 6),
-        Mark(8, 1, 3, '02.05.2021', 7),
-        Mark(10, 2, 0, '16.05.2021', 8),
-        Mark(5, 2, 2, '12.05.2021', 9),
-        Mark(8, 2, 2, '18.05.2021', 10)
-    ],
-    [ # список предметов
-        Subject('Математика', 0),
-        Subject('Физика', 1),
-        Subject('История', 2)
-    ]
-]
-
-dataPython = File.load(File.read(file_path, file_name, File.build(defaultData))) # данные программы (дефолт/из файла)
+dataPython = File.load(File.read(file_path, file_name, defaultData)) # данные программы (дефолт/из файла)
 
 # BLOCK: Инструкции для интерфейсов
 
